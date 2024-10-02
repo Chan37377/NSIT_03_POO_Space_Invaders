@@ -22,7 +22,7 @@ class Joueur() : # classe pour créer le vaisseau du joueur
         self.sens = "O"
         
     def marquer(self):
-        
+        self.score += 1
         
         
                 
@@ -44,8 +44,10 @@ class Balle():
                 self.etat = "chargee"
                 self.hauteur = 500
                 
-    def toucher(Ennemi):
-        if self
+    def toucher(self, vaisseau):
+        if (math.fabs(self.hauteur - vaisseau.hauteur) < 40) and (math.fabs(self.depart - vaisseau.depart) < 40):
+            self.etat = "chargee"
+            return True
         
                 
                 
@@ -68,7 +70,15 @@ class Ennemi():
             self.hauteur = 0
             
     def disparaitre(self):
-        
+        self.depart = random.randint(1,800-64)
+        self.hauteur = 10
+        self.type = random.randint(1,2)
+        if  (self.type == 1):
+            self.image = pygame.image.load("invader1.png")
+            self.vitesse = 0.2
+        elif (self.type ==2):
+            self.image = pygame.image.load("invader2.png")
+            self.vitesse = 0.1
         
         
         
