@@ -1,5 +1,6 @@
 import pygame  # necessaire pour charger les images et les sons
 import random
+import math
 
 class Joueur() : # classe pour créer le vaisseau du joueur
     def __init__(self) :
@@ -29,7 +30,7 @@ class Joueur() : # classe pour créer le vaisseau du joueur
 class Balle():
     def __init__(self, player):
         self.tireur = player
-        self.depart = player.position + 16  # 400-16
+        self.depart = player.position + 16  
         self.hauteur =495
         self.image = pygame.image.load("balle.png")
         self.etat = "chargee"
@@ -42,11 +43,12 @@ class Balle():
             self.hauteur -= 1
             if self.hauteur < 0:
                 self.etat = "chargee"
-                self.hauteur = 500
+                self.hauteur = 495
                 
     def toucher(self, vaisseau):
         if (math.fabs(self.hauteur - vaisseau.hauteur) < 40) and (math.fabs(self.depart - vaisseau.depart) < 40):
             self.etat = "chargee"
+            self.hauteur = 495
             return True
         
                 
@@ -59,7 +61,7 @@ class Ennemi():
     def __init__(self):
         self.depart = random.randint(0, 800-64)
         self.hauteur = random.randint(0, 75)
-        self.type = 0
+        self.type = random.randint(1, 2)
         self.image = pygame.image.load("invader1.png") or pygame.image.load("invader2.png") 
         self.vitesse = 0.1
         
@@ -71,7 +73,7 @@ class Ennemi():
             
     def disparaitre(self):
         self.depart = random.randint(1,800-64)
-        self.hauteur = 10
+        self.hauteur = random.randint(0, 100)
         self.type = random.randint(1,2)
         if  (self.type == 1):
             self.image = pygame.image.load("invader1.png")
