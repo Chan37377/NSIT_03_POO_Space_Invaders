@@ -45,6 +45,11 @@ def menu():
         
         pygame.display.update()
             
-            
+        pygame.mixer.music.load("Dancing In The Flames Instrumental.mp3")
+        pygame.mixer.music.play(loops=3, start=0)
+        pygame.mixer.music.set_volume(0.5)
+        
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            pygame.mixer.music.stop()
         
         

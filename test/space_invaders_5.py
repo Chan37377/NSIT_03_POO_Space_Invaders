@@ -10,6 +10,7 @@ screen = pygame.display.set_mode((800,600))
 pygame.display.set_caption("Battle War") 
 # chargement de l'image de fond
 fond = pygame.image.load('texture_sol.png')
+victoire = pygame.image.load('ecran_victoire.png')
 
 # creation du joueur
 player = space.Joueur()
@@ -63,5 +64,10 @@ while running : # boucle infinie pour laisser la fenêtre ouverte
     for ennemi in listeEnnemis:
         ennemi.avancer()
         screen.blit(ennemi.image,[ennemi.depart, ennemi.hauteur]) # appel de la fonction qui dessine le vaisseau du joueur
+    
+    if player.score == 100:
+        print("Gagné !")
+        screen = pygame.display.set_mode((1920,1280))
+        screen.blit(victoire,(0,0))
         
     pygame.display.update() # pour ajouter tout changement à l'écran

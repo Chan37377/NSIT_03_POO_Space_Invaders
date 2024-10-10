@@ -56,7 +56,7 @@ class Balle():
                 
 class Ennemi():
     
-    NbEnnemis = 7
+    NbEnnemis = 5
     
     def __init__(self):
         self.depart = random.randint(0, 800-64)
@@ -77,10 +77,10 @@ class Ennemi():
         self.type = random.randint(1,3)
         if  (self.type == 1):
             self.image = pygame.image.load("soldats.png")
-            self.vitesse = 0.05
+            self.vitesse = 0.025
         elif (self.type == 2):
             self.image = pygame.image.load("char-de-guerre.png")
-            self.vitesse = 0.1
+            self.vitesse = 0.075
         elif (self.type == 3):
             self.image = pygame.image.load("avion-de-chasse.png")
-            self.vitesse = 0.2
+            self.vitesse = 0.15
