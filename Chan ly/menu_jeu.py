@@ -1,6 +1,6 @@
 import pygame
 import sys
-import space_invaders_5
+import space_invaders
 from button import Button
 
 def get_font(size):
@@ -38,7 +38,7 @@ def menu():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if boutton_jouer.checkForInput(position_souris):
                     menu_on = False
-                    space_invaders_5.jeu()
+                    space_invaders.jeu()
                 if boutton_quitter.checkForInput(position_souris):
                     menu_on = False
                     pygame.quit()

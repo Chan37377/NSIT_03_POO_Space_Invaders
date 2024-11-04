@@ -8,6 +8,7 @@ class Joueur() : # classe pour créer le vaisseau du joueur
         self.image = pygame.image.load("reservoir.png")
         self.position = 400-64
         self.score = 0
+        self.vie = 10
         
     def deplacer(self):
         if self.sens == "gauche":
@@ -24,7 +25,9 @@ class Joueur() : # classe pour créer le vaisseau du joueur
         
     def marquer(self):
         self.score += 1
-        
+    
+    def perdre_vie(self):
+        self.vie -= 1
         
                 
 class Balle():
