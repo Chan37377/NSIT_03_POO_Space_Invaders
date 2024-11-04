@@ -11,7 +11,8 @@ def jeu():
     # chargement de l'image de fond
     fond = pygame.image.load('texture_sol.png')
     victoire = pygame.image.load('ecran_victoire.png')
-
+    defaite = pygame.image.load('ecran_defaite.png')
+    
     # creation du joueur
     player = space.Joueur()
     # creation de la balle
@@ -25,7 +26,8 @@ def jeu():
         
     ### BOUCLE DE JEU  ###
     running = True # variable pour laisser la fenêtre ouverte
-
+    niveau = 1
+    
     while running : # boucle infinie pour laisser la fenêtre ouverte
         # dessin du fond
         screen.blit(fond,(0,0))
@@ -64,11 +66,33 @@ def jeu():
         for ennemi in listeEnnemis:
             ennemi.avancer()
             screen.blit(ennemi.image,[ennemi.depart, ennemi.hauteur]) # appel de la fonction qui dessine le vaisseau du joueur
+        # perte de vie
+        for ennemi in listeEnnemis:
+            if ennemi.hauteur > 595:
+                player.perdre_vie()
+        print(f"Vie = {player.vie} vies")
         
-        if player.score == 10:
+        
+        #changement de niveaux
+        if player.score > 3 and niveau == 1:
+            niveau = 2
+            ennemi.NbEnnemi = 5
+            
+        if player.score > 8 and niveau == 2:
+            niveau = 3
+            ennemi.NbEnnemi = 7 
+        
+        # fin de partie (victoire)
+        if player.score >= 15 and niveau == 3:
             print("Gagné !")
             screen = pygame.display.set_mode((1920,1280))
             screen.blit(victoire,(0,0))
+        
+        # fin de partie (défaite)
+        if player.vie <= 0:
+            print("Perdu !")
+            screen = pygame.display.set_mode((1920,1280))
+            screen.blit(defaite,(0,0))
             
         pygame.display.update() # pour ajouter tout changement à l'écran
 

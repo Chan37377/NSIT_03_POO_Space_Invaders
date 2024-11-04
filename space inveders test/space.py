@@ -60,7 +60,7 @@ class Balle():
                 
 class Ennemi():
     
-    NbEnnemis = 5
+    NbEnnemis = 3
     
     def __init__(self):
         self.depart = random.randint(0, 800-64)
