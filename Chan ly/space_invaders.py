@@ -11,7 +11,8 @@ def jeu():
     # chargement de l'image de fond
     fond = pygame.image.load('texture_sol.png')
     victoire = pygame.image.load('ecran_victoire.png')
-
+    defaite = pygame.image.load('ecran_defaite.png')
+    
     # creation du joueur
     player = space.Joueur()
     # creation de la balle
@@ -25,11 +26,13 @@ def jeu():
         
     ### BOUCLE DE JEU  ###
     running = True # variable pour laisser la fenêtre ouverte
+    fin_partie = False
     niveau = 1
     
     while running : # boucle infinie pour laisser la fenêtre ouverte
         # dessin du fond
-        screen.blit(fond,(0,0))
+        if not fin_partie:
+            screen.blit(fond,(0,0))
 
         ### Gestion des événements  ###
         for event in pygame.event.get(): # parcours de tous les event pygame dans cette fenêtre
@@ -54,6 +57,7 @@ def jeu():
                 ennemi.disparaitre()
                 player.marquer()
         print(f"Score = {player.score} points")
+        print(f"Niveau = {niveau} ")
         # placement des objets
         # le joueur
         player.deplacer()
@@ -69,27 +73,37 @@ def jeu():
         for ennemi in listeEnnemis:
             if ennemi.hauteur > 595:
                 player.perdre_vie()
+                ennemi.hauteur = 0
         print(f"Vie = {player.vie} vies")
         
          #changement de niveaux
         if player.score > 3 and niveau == 1:
             niveau = 2
-            ennemi.NbEnnemi = 5
+            for indice in range(2):
+                vaisseau = space.Ennemi()
+                listeEnnemis.append(vaisseau)
+            ennemi.NbEnnemi = len(listeEnnemis)
             
         if player.score > 8 and niveau == 2:
             niveau = 3
-            ennemi.NbEnnemi = 7 
+            for indice in range(2):
+                vaisseau = space.Ennemi()
+                listeEnnemis.append(vaisseau)
+            ennemi.NbEnnemi = len(listeEnnemis) 
         
         # fin de partie (victoire)
         if player.score >= 15 and niveau == 3:
             print("Gagné !")
             screen = pygame.display.set_mode((1920,1280))
             screen.blit(victoire,(0,0))
+            fin_partie = True
         
         # fin de partie (défaite)
         if player.vie <= 0:
             print("Perdu !")
             screen = pygame.display.set_mode((1920,1280))
             screen.blit(defaite,(0,0))
+            fin_partie = True
             
-        pygame.display.update() # pour ajouter tout changement à l'écran
+        if not fin_partie:
+            pygame.display.update() # pour ajouter tout changement à l'écran
