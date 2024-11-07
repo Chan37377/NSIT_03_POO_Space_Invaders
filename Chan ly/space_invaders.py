@@ -56,8 +56,7 @@ def jeu():
             if tir.toucher(ennemi):
                 ennemi.disparaitre()
                 player.marquer()
-        print(f"Score = {player.score} points")
-        print(f"Niveau = {niveau} ")
+                
         # placement des objets
         # le joueur
         player.deplacer()
@@ -74,7 +73,6 @@ def jeu():
             if ennemi.hauteur > 595:
                 player.perdre_vie()
                 ennemi.hauteur = 0
-        print(f"Vie = {player.vie} vies")
         
          #changement de niveaux
         if player.score > 3 and niveau == 1:
@@ -96,6 +94,7 @@ def jeu():
             print("Gagné !")
             screen = pygame.display.set_mode((1920,1280))
             screen.blit(victoire,(0,0))
+            pygame.display.update()
             fin_partie = True
         
         # fin de partie (défaite)
@@ -103,6 +102,7 @@ def jeu():
             print("Perdu !")
             screen = pygame.display.set_mode((1920,1280))
             screen.blit(defaite,(0,0))
+            pygame.display.update()
             fin_partie = True
             
         if not fin_partie:
